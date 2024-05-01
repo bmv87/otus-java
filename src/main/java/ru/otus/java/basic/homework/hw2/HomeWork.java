@@ -109,7 +109,7 @@ public class HomeWork {
     }
 
     private static void printArray(int[] array, String message) {
-        if (!message.equals("")) {
+        if (!message.isBlank()) {
             System.out.println(message);
         }
         if(array.length == 0){
@@ -127,7 +127,7 @@ public class HomeWork {
                 System.out.print(" }");
             }
         }
-        if (!message.equals("")) {
+        if (!message.isBlank()) {
             System.out.println();
         }
 
