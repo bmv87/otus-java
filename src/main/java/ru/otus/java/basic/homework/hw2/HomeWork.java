@@ -67,19 +67,19 @@ public class HomeWork {
         System.out.println("-------- Task 7 (checkExistsEqualsSumsOfItemsInArray) --------");
         var array = new int[]{1, 1, 1, 3};
         printArray(array, "-- Исходный массив --");
-        checkExistsEqualsSumsOfItemsInArray(array);
+        checkExistsEqualsSumsOfItemsInArray2(array);
         array = new int[]{5, 3, 4, -2};
         printArray(array, "-- Исходный массив --");
-        checkExistsEqualsSumsOfItemsInArray(array);
+        checkExistsEqualsSumsOfItemsInArray2(array);
         array = new int[]{7, 2, 2, 2};
         printArray(array, "-- Исходный массив --");
-        checkExistsEqualsSumsOfItemsInArray(array);
+        checkExistsEqualsSumsOfItemsInArray2(array);
         array = new int[]{9, 4};
         printArray(array, "-- Исходный массив --");
-        checkExistsEqualsSumsOfItemsInArray(array);
+        checkExistsEqualsSumsOfItemsInArray2(array);
         array = new int[]{5};
         printArray(array, "-- Исходный массив --");
-        checkExistsEqualsSumsOfItemsInArray(array);
+        checkExistsEqualsSumsOfItemsInArray2(array);
         System.out.println();
     }
 
@@ -112,7 +112,7 @@ public class HomeWork {
         if (!message.isBlank()) {
             System.out.println(message);
         }
-        if(array.length == 0){
+        if (array.length == 0) {
             System.out.print("{ }");
             return;
         }
@@ -219,7 +219,7 @@ public class HomeWork {
         }
     }
 
-    private static boolean isSumOfItemsOfSeparatedArrayEquals (int[] intArray, int indexSeparator) {
+    private static boolean isSumOfItemsOfSeparatedArrayEquals(int[] intArray, int indexSeparator) {
         int sumInLeftHalf = 0;
         int sumInRightHalf = 0;
 
@@ -230,38 +230,56 @@ public class HomeWork {
                 sumInRightHalf += intArray[i];
             }
         }
-      return sumInRightHalf == sumInLeftHalf;
+        return sumInRightHalf == sumInLeftHalf;
     }
 
-    private static void checkExistsEqualsSumsOfItemsInArray (int[] intArray) {
+    private static void checkExistsEqualsSumsOfItemsInArray(int[] intArray) {
 
-        for (int i = 1; i < intArray.length ; i++) {
-           if(isSumOfItemsOfSeparatedArrayEquals(intArray, i)){
-               System.out.println("Индекс “точки”, в которой сумма левой и правой части равны: " + i);
-           }
+        for (int i = 1; i < intArray.length; i++) {
+            if (isSumOfItemsOfSeparatedArrayEquals(intArray, i)) {
+                System.out.println("Индекс “точки”, в которой сумма левой и правой части равны: " + i);
+            }
         }
         System.out.println("В массиве нет “точки”, в которой сумма левой и правой части равны");
     }
 
-    private static void reverseArray (int[] intArray) {
-        for (int i = 0; i < intArray.length/2; i++) {
+    private static void checkExistsEqualsSumsOfItemsInArray2(int[] intArray) {
+        var totalSum = getSumOfArrayItems(intArray);
+        if (totalSum % 2 != 0) {
+            System.out.println("В массиве нет “точки”, в которой сумма левой и правой части равны");
+        }
+        var halfOfTotalSum = totalSum / 2;
+        for (int i = 0; i < intArray.length; i++) {
+            halfOfTotalSum -= intArray[i];
+            if (halfOfTotalSum == 0) {
+                System.out.println("Индекс “точки”, в которой сумма левой и правой части равны: " + (i+1));
+                return;
+            } else if (halfOfTotalSum < 0) {
+                break;
+            }
+        }
+        System.out.println("В массиве нет “точки”, в которой сумма левой и правой части равны");
+    }
+
+    private static void reverseArray(int[] intArray) {
+        for (int i = 0; i < intArray.length / 2; i++) {
             int secondIndex = intArray.length - i - 1;
-            int tempFirstValue= intArray[i];
+            int tempFirstValue = intArray[i];
             intArray[i] = intArray[secondIndex];
-            intArray[secondIndex]=tempFirstValue;
+            intArray[secondIndex] = tempFirstValue;
         }
     }
 
-    private static void reverseArrayRecursive (int[] intArray) {
-        reverseArray(intArray,0, intArray.length - 1);
+    private static void reverseArrayRecursive(int[] intArray) {
+        reverseArray(intArray, 0, intArray.length - 1);
     }
 
-    private static void reverseArray (int[] intArray, int firstIndex, int secondIndex) {
-        if(firstIndex<secondIndex){
-            int tempFirstValue= intArray[firstIndex];
+    private static void reverseArray(int[] intArray, int firstIndex, int secondIndex) {
+        if (firstIndex < secondIndex) {
+            int tempFirstValue = intArray[firstIndex];
             intArray[firstIndex] = intArray[secondIndex];
-            intArray[secondIndex]=tempFirstValue;
-            reverseArray(intArray,++firstIndex, --secondIndex);
+            intArray[secondIndex] = tempFirstValue;
+            reverseArray(intArray, ++firstIndex, --secondIndex);
         }
     }
 }
