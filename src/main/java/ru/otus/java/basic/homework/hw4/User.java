@@ -22,7 +22,7 @@ public class User {
     public User() {
     }
 
-    public User(String surname, String name, String patronymic, int birthYear, String email) throws Exception {
+    public User(String surname, String name, String patronymic, int birthYear, String email) {
 
         isValidPartOfName(surname).throwIfNotValid();
         isValidPartOfName(name).throwIfNotValid();

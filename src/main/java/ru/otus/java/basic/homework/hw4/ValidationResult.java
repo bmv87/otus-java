@@ -24,9 +24,9 @@ public class ValidationResult {
         this.message = message;
     }
 
-    public void throwIfNotValid() throws Exception {
+    public void throwIfNotValid() {
         if (!valid) {
-            throw new Exception(message != null ? message : "Что-то пошло не так");
+            throw new RuntimeException(message != null ? message : "Что-то пошло не так");
         }
     }
 }

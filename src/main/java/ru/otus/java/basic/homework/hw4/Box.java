@@ -6,12 +6,12 @@ public class Box {
     private final BoxSize size;
     private boolean opened;
 
-    public Box(int width, int height, int depth) throws Exception {
+    public Box(int width, int height, int depth) {
         this.color = ColorsEnum.black;
         this.size = new BoxSize(width, height, depth);
     }
 
-    public Box(int width, int height, int depth, ColorsEnum color) throws Exception {
+    public Box(int width, int height, int depth, ColorsEnum color) {
         this.color = color;
         this.size = new BoxSize(width, height, depth);
     }

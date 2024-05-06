@@ -23,7 +23,7 @@ public class Main {
             box.clearItem();
             box.close();
             box = new Box(0, 20, 20);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -53,7 +53,7 @@ public class Main {
                     System.out.println(user.toString());
                 }
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
 

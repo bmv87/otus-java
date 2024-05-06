@@ -21,7 +21,7 @@ public class BoxSize {
         return depth;
     }
 
-    public BoxSize(int width, int height, int depth) throws Exception {
+    public BoxSize(int width, int height, int depth) {
         isValidSizeParams(width, height, depth).throwIfNotValid();
 
         this.width = width;
