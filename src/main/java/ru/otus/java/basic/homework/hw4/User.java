@@ -1,6 +1,6 @@
 package ru.otus.java.basic.homework.hw4;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,8 +124,8 @@ public class User {
     private ValidationResult isValidBirthYear(int birthYear) {
         var result = new ValidationResult(true);
 
-        Calendar cal = Calendar.getInstance();
-        int currentYear = cal.get(Calendar.YEAR);
+        LocalDate date = LocalDate.now();
+        int currentYear = date.getYear();
         int minimalYear = currentYear - 130;
         boolean isValid = birthYear <= currentYear && birthYear >= minimalYear;
         if (!isValid) {

@@ -1,6 +1,6 @@
 package ru.otus.java.basic.homework.hw4;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
@@ -45,8 +45,8 @@ public class Main {
                     new User("Smith", "Jane", "Albertovich", 1991, "Smith9@dd.ru")
             };
 
-            Calendar cal = Calendar.getInstance();
-            int currentYear = cal.get(Calendar.YEAR);
+            LocalDate date = LocalDate.now();
+            int currentYear = date.getYear();
             int maxYear = currentYear - 40;
             for (User user : users) {
                 if (user != null && user.getBirthYear() < maxYear) {
