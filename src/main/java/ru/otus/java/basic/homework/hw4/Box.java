@@ -7,7 +7,7 @@ public class Box {
     private boolean opened;
 
     public Box(int width, int height, int depth) {
-        this.color = ColorsEnum.black;
+        this.color = ColorsEnum.BLACK;
         this.size = new BoxSize(width, height, depth);
     }
 

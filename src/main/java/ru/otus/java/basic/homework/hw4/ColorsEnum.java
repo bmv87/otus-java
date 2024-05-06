@@ -1,10 +1,10 @@
 package ru.otus.java.basic.homework.hw4;
 
 public enum ColorsEnum {
-    black("Черный"),
-    wite("Белый"),
-    red("Красный"),
-    green("Зеленый");
+    BLACK("Черный"),
+    WITE("Белый"),
+    RED("Красный"),
+    GREEN("Зеленый");
 
     private final String name;
 

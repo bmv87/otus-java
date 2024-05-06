@@ -13,7 +13,7 @@ public class Main {
         try {
             var box = new Box(20, 20, 20);
             System.out.println(box.getInfo());
-            box.setColor(ColorsEnum.green);
+            box.setColor(ColorsEnum.GREEN);
             box.putItem("золото");
             box.clearItem();
             box.open();
