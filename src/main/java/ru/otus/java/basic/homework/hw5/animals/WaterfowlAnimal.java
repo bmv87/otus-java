@@ -12,12 +12,6 @@ public class WaterfowlAnimal extends Animal {
         return energyForSwimming;
     }
 
-    public void setEnergyForSwimming(int energyForSwimming) {
-        this.energyForSwimming = energyForSwimming;
-        System.out.println(name + " отдохнул и может поплавать.");
-
-    }
-
     public float swim(int distance) {
         return move(distance, energyForSwimming, " устал. Плыть больше не может.");
     }

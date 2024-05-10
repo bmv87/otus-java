@@ -22,10 +22,6 @@ public class MainApplication {
                 System.out.println(String.format("%s недобежал", animal.getName()));
             }
             if (animal instanceof WaterfowlAnimal waterfowlAnimal) {
-                if (waterfowlAnimal.getEnergyForSwimming() == 0) {
-                    waterfowlAnimal.swim(1);
-                    waterfowlAnimal.setEnergyForSwimming(10);
-                }
                 var swimTime = waterfowlAnimal.swim(5);
                 if (swimTime > -1f) {
                     System.out.println(String.format("%s плыл: %.2f ч.", animal.getName(), swimTime));
