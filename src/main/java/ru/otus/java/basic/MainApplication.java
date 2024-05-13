@@ -22,7 +22,7 @@ public class MainApplication {
                 System.out.println(String.format("%s недобежал", animal.getName()));
             }
             if (animal instanceof WaterfowlAnimal waterfowlAnimal) {
-                var swimTime = waterfowlAnimal.swim(5);
+                var swimTime = waterfowlAnimal.swim(30);
                 if (swimTime > -1f) {
                     System.out.println(String.format("%s плыл: %.2f ч.", animal.getName(), swimTime));
                 } else {

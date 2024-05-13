@@ -56,14 +56,19 @@ public abstract class Animal {
         }
         float time = 0;
 
-        for (int i = 1; i <= distance; i++) {
-            if (endurance < energy) {
-                System.out.println(name + message);
-                return -1;
-            }
-            time += (speed / distance);
-            endurance -= energy;
+        int maxAvalableDistance = endurance / energy;
+        System.out.println(String.format("%s Максимальная доступная дистанция: %d км.", name, maxAvalableDistance ));
+        if (maxAvalableDistance == distance || maxAvalableDistance > distance) {
+            time = ((float) distance / speed);
+            endurance -= (energy * distance);
+        } else {
+            time = ((float) maxAvalableDistance / speed);
+            System.out.println(String.format("%s На дистанцию %d км ушло: %.2f ч.", name, maxAvalableDistance, time));
+            endurance -= (energy * maxAvalableDistance);
+            System.out.println(name + message);
+            return -1;
         }
+
         return time;
     }
 
