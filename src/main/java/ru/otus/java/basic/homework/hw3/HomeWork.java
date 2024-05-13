@@ -50,8 +50,8 @@ public class HomeWork {
 //        var array = new int[][]{{1, -16, 8, 2, 4, -12, 5, 3}, {2, 3, 0, 1}, {1}, {3}};
         System.out.println("Исходный массив");
         printSquareArray(array, false);
-        System.out.println("Сумма второй строки: " +  getSumOfRow(array, 1));
-        System.out.println("Сумма второй колонки: " +  getSumOfColumn(array, 1));
+        System.out.println("Сумма второй строки: " + getSumOfRow(array, 1));
+        System.out.println("Сумма второй колонки: " + getSumOfColumn(array, 1));
     }
 
     private static int sumOfPositiveElements(int[][] arrayOfIntArray) {
@@ -87,7 +87,7 @@ public class HomeWork {
         int sum = 0;
         for (int i = 0; i < arrayOfIntArray.length; i++) {
             if (columnIndex > (arrayOfIntArray[i].length - 1))
-                return  -1;
+                return -1;
 //            System.out.print(arrayOfIntArray[i][columnIndex]);
             sum += arrayOfIntArray[i][columnIndex];
         }
@@ -149,13 +149,9 @@ public class HomeWork {
     }
 
     private static void setZeroInArrayDiagonals(int[][] arrayOfIntArray) {
-        int secondDiagonalIndexI = arrayOfIntArray.length - 1;
-        int secondDiagonalIndexJ = 0;
-        for (int i = 0; i < arrayOfIntArray.length; i++) {
+        for (int i = 0, secondDiagonalIndexJ = arrayOfIntArray.length - 1; i < arrayOfIntArray.length; i++, secondDiagonalIndexJ--) {
             arrayOfIntArray[i][i] = 0;
-            arrayOfIntArray[secondDiagonalIndexI][secondDiagonalIndexJ] = 0;
-            --secondDiagonalIndexI;
-            ++secondDiagonalIndexJ;
+            arrayOfIntArray[i][secondDiagonalIndexJ] = 0;
         }
     }
 
