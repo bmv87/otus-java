@@ -4,14 +4,13 @@ import ru.otus.java.basic.homework.hw6.bowls.Bowl;
 
 public class Cat {
 
-    private String name;
-    private int appetite;
+    private final String name;
+    private final int appetite;
+    private boolean bellyful;
 
     public void gotHungry() {
         this.bellyful = false;
     }
-
-    private boolean bellyful;
 
     public String getName() {
         return name;
@@ -22,12 +21,12 @@ public class Cat {
         this.appetite = appetite;
     }
 
-    public boolean eatFromBowl(Bowl bowl) {
+    public boolean eat(Bowl bowl) {
         if (bellyful) {
             System.out.println(name + " кушать не хочет.");
             return false;
         }
-        bellyful = bowl.getFood(appetite);
+        bellyful = bowl.reduceFood(appetite);
         return bellyful;
     }
 }

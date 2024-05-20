@@ -16,7 +16,7 @@ public class Feeding {
         Bowl bowl = new Bowl(50);
 
         for (Cat cat : cats) {
-            if(cat.eatFromBowl(bowl)){
+            if(cat.eat(bowl)){
                 System.out.println(cat.getName() + " поел.");
                 continue;
             }
@@ -24,7 +24,7 @@ public class Feeding {
         }
         bowl.putFood(100);
         for (Cat cat : cats) {
-            if(cat.eatFromBowl(bowl)){
+            if(cat.eat(bowl)){
                 System.out.println(cat.getName() + " поел.");
                 continue;
             }

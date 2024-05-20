@@ -12,7 +12,8 @@ public class Bowl {
 
     public void putFood(int foodVolume) {
         if (foodVolume < 0) {
-            System.out.printf("Неправильно задан объем еды: %d ед.", foodVolume);
+            System.out.printf("Неправильно задан объем еды: %d ед.\n", foodVolume);
+            return;
         }
         var newFoodVolume = currentFoodVolume + foodVolume;
         currentFoodVolume = Math.min(maxFoodVolume, newFoodVolume);
@@ -21,16 +22,15 @@ public class Bowl {
         }
     }
 
-    public boolean getFood(int foodVolume) {
-        if (foodVolume < 0) {
-            System.out.printf("Неправильно задан объем еды: %d ед.", foodVolume);
+    public boolean reduceFood(int amount) {
+        if (amount < 0) {
+            System.out.printf("Неправильно задан объем еды: %d ед.\n", amount);
             return false;
         }
-        if (currentFoodVolume < foodVolume) {
-
+        if (currentFoodVolume < amount) {
             return false;
         }
-        currentFoodVolume -= foodVolume;
+        currentFoodVolume -= amount;
         return true;
     }
 }
