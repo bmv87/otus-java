@@ -76,11 +76,9 @@ public class Driver implements Energy {
             return currentTransport.move(distance, terrainType);
         }
 
-        if (isEnoughEnergy(distance)) {
-            if (currentTransport.move(distance, terrainType)) {
-                consumeEnergy(distance);
-                return true;
-            }
+        if (isEnoughEnergy(distance) && currentTransport.move(distance, terrainType)) {
+            consumeEnergy(distance);
+            return true;
         }
         System.out.printf("%s не осилит управление этим транспортом!%n", name);
         return false;
