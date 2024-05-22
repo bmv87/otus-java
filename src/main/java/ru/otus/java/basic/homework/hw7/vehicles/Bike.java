@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Bike implements Drivable {
 
-    private final String TYPE_NAME = "Велосипед";
+    private static final String TYPE_NAME = "Велосипед";
 
     private final EnumMap<TerrainTypeEnum, Boolean> availableTerrainTypes;
 

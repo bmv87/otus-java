@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Horse implements Energy, Drivable {
 
-    private final String TYPE_NAME = "Лошадь";
+    private static final String TYPE_NAME = "Лошадь";
     private int energyVolume;
     private final int consumption;
     private final EnumMap<TerrainTypeEnum, Boolean> availableTerrainTypes;

@@ -8,10 +8,10 @@ import java.util.EnumMap;
 
 public abstract class MotorVehicle implements Energy, Drivable {
 
-    int energyVolume;
-    final MotorVehicleEnum vehicleType;
-    final int consumption;
-    final EnumMap<TerrainTypeEnum, Boolean> availableTerrainTypes = new EnumMap(TerrainTypeEnum.class);
+    protected int energyVolume;
+    protected final MotorVehicleEnum vehicleType;
+    protected final int consumption;
+    protected final EnumMap<TerrainTypeEnum, Boolean> availableTerrainTypes = new EnumMap(TerrainTypeEnum.class);
 
     public MotorVehicle(MotorVehicleEnum vehicleType, int energyVolume, int consumption) {
         if (vehicleType == null) {
