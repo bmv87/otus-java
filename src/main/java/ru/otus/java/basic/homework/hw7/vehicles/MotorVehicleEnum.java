@@ -5,6 +5,7 @@ public enum MotorVehicleEnum {
     CAR("Автомобиль");
 
     private final String description;
+
     MotorVehicleEnum(String description) {
         this.description = description;
     }

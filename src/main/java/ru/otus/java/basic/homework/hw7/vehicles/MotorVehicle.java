@@ -14,6 +14,15 @@ public abstract class MotorVehicle implements Energy, Drivable {
     final EnumMap<TerrainTypeEnum, Boolean> availableTerrainTypes = new EnumMap(TerrainTypeEnum.class);
 
     public MotorVehicle(MotorVehicleEnum vehicleType, int energyVolume, int consumption) {
+        if (vehicleType == null) {
+            throw new IllegalArgumentException("Тип транспорта не задан!");
+        }
+        if (energyVolume < 0) {
+            throw new IllegalArgumentException("Запас энергии не задан!");
+        }
+        if (consumption < 0) {
+            throw new IllegalArgumentException("Расход энергии не задан!");
+        }
         this.vehicleType = vehicleType;
         this.energyVolume = energyVolume;
         this.consumption = consumption;
@@ -68,6 +77,10 @@ public abstract class MotorVehicle implements Energy, Drivable {
 
     @Override
     public boolean isAvailableTerrain(TerrainTypeEnum terrainType) {
+        if (terrainType == null) {
+            System.out.println("Тип местности не задан!");
+            return false;
+        }
         var isAvailable = availableTerrainTypes.get(terrainType);
         if (isAvailable == null || !isAvailable)
             System.out.printf("%s: местность '%s' недоступна.%n", vehicleType.getDescription(), terrainType.getDescription());

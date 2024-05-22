@@ -36,6 +36,10 @@ public class Bike implements Drivable {
 
     @Override
     public boolean isAvailableTerrain(TerrainTypeEnum terrainType) {
+        if (terrainType == null) {
+            System.out.println("Тип местности не задан!");
+            return false;
+        }
         var isAvailable = availableTerrainTypes.get(terrainType);
         if (isAvailable == null || !isAvailable)
             System.out.printf("%s: местность '%s' недоступна. %n", TYPE_NAME, terrainType.getDescription());

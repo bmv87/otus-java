@@ -15,6 +15,12 @@ public class Horse implements Energy, Drivable {
     private final EnumMap<TerrainTypeEnum, Boolean> availableTerrainTypes;
 
     public Horse(int energyVolume, int consumption) {
+        if (energyVolume < 0) {
+            throw new IllegalArgumentException("Запас энергии не задан!");
+        }
+        if (consumption < 0) {
+            throw new IllegalArgumentException("Расход энергии не задан!");
+        }
         this.energyVolume = energyVolume;
         this.consumption = consumption;
         this.availableTerrainTypes = new EnumMap<>(Map.ofEntries(
@@ -37,6 +43,10 @@ public class Horse implements Energy, Drivable {
 
     @Override
     public boolean isEnoughEnergy(int distance) {
+        if (distance <= 0) {
+            System.out.println("Неверно указана дистанция!");
+            return false;
+        }
         var energyConsumption = distance * consumption;
         return energyVolume >= energyConsumption;
     }
@@ -65,6 +75,10 @@ public class Horse implements Energy, Drivable {
 
     @Override
     public boolean isAvailableTerrain(TerrainTypeEnum terrainType) {
+        if (terrainType == null) {
+            System.out.println("Тип местности не задан!");
+            return false;
+        }
         var isAvailable = availableTerrainTypes.get(terrainType);
         if (isAvailable == null || !isAvailable)
             System.out.printf("%s: местность '%s' недоступна.%n", TYPE_NAME, terrainType.getDescription());

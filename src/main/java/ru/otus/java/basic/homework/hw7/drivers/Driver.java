@@ -11,6 +11,15 @@ public class Driver implements Energy {
     private final int consumption;
 
     public Driver(String name, int energyVolume, int consumption) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Имя водителя должно быть задано!");
+        }
+        if (energyVolume < 0) {
+            throw new IllegalArgumentException("Запас энергии не задан!");
+        }
+        if (consumption < 0) {
+            throw new IllegalArgumentException("Расход энергии не задан!");
+        }
         this.name = name;
         this.energyVolume = energyVolume;
         this.consumption = consumption;
@@ -28,6 +37,10 @@ public class Driver implements Energy {
 
     @Override
     public boolean isEnoughEnergy(int distance) {
+        if (distance <= 0) {
+            System.out.println("Неверно указана дистанция!");
+            return false;
+        }
         var energyConsumption = distance * consumption;
         return energyVolume >= energyConsumption;
     }
@@ -64,7 +77,6 @@ public class Driver implements Energy {
             System.out.println("Транспорт не выбран!");
             return false;
         }
-
         if (distance <= 0) {
             System.out.println("Неверно указана дистанция!");
             return false;
