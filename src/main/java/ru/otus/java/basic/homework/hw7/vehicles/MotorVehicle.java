@@ -5,7 +5,6 @@ import ru.otus.java.basic.homework.hw7.Energy;
 import ru.otus.java.basic.homework.hw7.terrain.TerrainTypeEnum;
 
 import java.util.EnumMap;
-import java.util.Map;
 
 public abstract class MotorVehicle implements Energy, Drivable {
 
@@ -23,7 +22,7 @@ public abstract class MotorVehicle implements Energy, Drivable {
     private void consumeEnergy(int distance) {
         var energyConsumption = distance * consumption;
         energyVolume -= energyConsumption;
-        System.out.printf("%s: проехал %d км. \n", vehicleType.getDescription(), distance);
+        System.out.printf("%s: проехал %d км. %n", vehicleType.getDescription(), distance);
     }
 
     @Override
@@ -63,7 +62,7 @@ public abstract class MotorVehicle implements Energy, Drivable {
             consumeEnergy(distance);
             return true;
         }
-        System.out.printf("%s: недостаточно энергии для продвижения на указанную дистанцию!\n", vehicleType.getDescription());
+        System.out.printf("%s: недостаточно энергии для продвижения на указанную дистанцию!%n", vehicleType.getDescription());
         return false;
     }
 
@@ -71,7 +70,7 @@ public abstract class MotorVehicle implements Energy, Drivable {
     public boolean isAvailableTerrain(TerrainTypeEnum terrainType) {
         var isAvailable = availableTerrainTypes.get(terrainType);
         if (isAvailable == null || !isAvailable)
-            System.out.printf("%s: местность '%s' недоступна.\n", vehicleType.getDescription(), terrainType.getDescription());
+            System.out.printf("%s: местность '%s' недоступна.%n", vehicleType.getDescription(), terrainType.getDescription());
         return isAvailable != null && isAvailable;
     }
 }

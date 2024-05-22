@@ -23,7 +23,7 @@ public class Driver implements Energy {
     private void consumeEnergy(int distance) {
         var energyConsumption = distance * consumption;
         energyVolume -= energyConsumption;
-        System.out.printf("%s: потратил %d ед. энергии. \n", name, distance);
+        System.out.printf("%s: потратил %d ед. энергии. %n", name, distance);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Driver implements Energy {
                 return true;
             }
         }
-        System.out.printf("%s не осилит управление этим транспортом!\n", name);
+        System.out.printf("%s не осилит управление этим транспортом!%n", name);
         return false;
     }
 

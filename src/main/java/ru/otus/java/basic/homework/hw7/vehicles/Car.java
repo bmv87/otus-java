@@ -1,10 +1,7 @@
 package ru.otus.java.basic.homework.hw7.vehicles;
 
-import ru.otus.java.basic.homework.hw7.Drivable;
-import ru.otus.java.basic.homework.hw7.Energy;
 import ru.otus.java.basic.homework.hw7.terrain.TerrainTypeEnum;
 
-import java.util.EnumMap;
 import java.util.Map;
 
 public class Car extends MotorVehicle {

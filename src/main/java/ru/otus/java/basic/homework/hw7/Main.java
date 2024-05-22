@@ -20,7 +20,7 @@ public class Main {
 
         for (Drivable vehicle : vehicles) {
             System.out.println();
-            System.out.printf("============== %s =============== \n", vehicle.getClass().getSimpleName());
+            System.out.printf("============== %s =============== %n", vehicle.getClass().getSimpleName());
             driver.leaveVehicle();
             if (!driver.drive(20, TerrainTypeEnum.DENSE_FOREST)) {
                 System.out.println("Не удалось прокатиться");

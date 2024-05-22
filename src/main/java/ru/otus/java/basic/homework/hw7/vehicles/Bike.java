@@ -30,7 +30,7 @@ public class Bike implements Drivable {
         if (!isAvailableTerrain(terrainType)) {
             return false;
         }
-        System.out.printf("%s: проехал %d км. \n", TYPE_NAME, distance);
+        System.out.printf("%s: проехал %d км. %n", TYPE_NAME, distance);
         return true;
     }
 
@@ -38,7 +38,7 @@ public class Bike implements Drivable {
     public boolean isAvailableTerrain(TerrainTypeEnum terrainType) {
         var isAvailable = availableTerrainTypes.get(terrainType);
         if (isAvailable == null || !isAvailable)
-            System.out.printf("%s: местность '%s' недоступна. \n", TYPE_NAME, terrainType.getDescription());
+            System.out.printf("%s: местность '%s' недоступна. %n", TYPE_NAME, terrainType.getDescription());
         return isAvailable != null && isAvailable;
     }
 }

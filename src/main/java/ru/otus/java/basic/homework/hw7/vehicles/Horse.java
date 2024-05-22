@@ -26,7 +26,7 @@ public class Horse implements Energy, Drivable {
     private void consumeEnergy(int distance) {
         var energyConsumption = distance * consumption;
         energyVolume -= energyConsumption;
-        System.out.printf("%s: проехал %d км. \n", TYPE_NAME, distance);
+        System.out.printf("%s: проехал %d км. %n", TYPE_NAME, distance);
     }
 
 
@@ -59,7 +59,7 @@ public class Horse implements Energy, Drivable {
             consumeEnergy(distance);
             return true;
         }
-        System.out.printf("%s: недостаточно энергии для продвижения на указанную дистанцию!\n", TYPE_NAME);
+        System.out.printf("%s: недостаточно энергии для продвижения на указанную дистанцию!%n", TYPE_NAME);
         return false;
     }
 
@@ -67,7 +67,7 @@ public class Horse implements Energy, Drivable {
     public boolean isAvailableTerrain(TerrainTypeEnum terrainType) {
         var isAvailable = availableTerrainTypes.get(terrainType);
         if (isAvailable == null || !isAvailable)
-            System.out.printf("%s: местность '%s' недоступна.\n", TYPE_NAME, terrainType.getDescription());
+            System.out.printf("%s: местность '%s' недоступна.%n", TYPE_NAME, terrainType.getDescription());
         return isAvailable != null && isAvailable;
     }
 }
