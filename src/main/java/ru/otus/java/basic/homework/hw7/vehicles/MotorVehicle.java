@@ -13,7 +13,7 @@ public abstract class MotorVehicle implements Energy, Drivable {
     protected final int consumption;
     protected final EnumMap<TerrainTypeEnum, Boolean> availableTerrainTypes = new EnumMap(TerrainTypeEnum.class);
 
-    public MotorVehicle(MotorVehicleEnum vehicleType, int energyVolume, int consumption) {
+    protected MotorVehicle(MotorVehicleEnum vehicleType, int energyVolume, int consumption) {
         if (vehicleType == null) {
             throw new IllegalArgumentException("Тип транспорта не задан!");
         }
