@@ -1,8 +1,8 @@
 package ru.otus.java.basic.homework.hw9.employees;
 
 public class Employee {
-    private String name;
-    private int age;
+    private final String name;
+    private final int age;
 
     public Employee(String name, int age) {
         this.name = name;
