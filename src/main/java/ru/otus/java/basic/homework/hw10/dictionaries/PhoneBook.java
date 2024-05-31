@@ -3,10 +3,7 @@ package ru.otus.java.basic.homework.hw10.dictionaries;
 import ru.otus.java.basic.homework.hw10.validation.ArgumentValidationException;
 import ru.otus.java.basic.homework.hw10.validation.ValidationResult;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,9 +23,9 @@ public class PhoneBook {
             var item = items.get(key);
             phoneNumber = phoneNumber.trim();
             if (!item.contains(phoneNumber)) {
-                var newPholeList = new ArrayList<String>(item);
-                newPholeList.add(phoneNumber);
-                items.put(key, newPholeList);
+                var newPhoneList = new ArrayList<String>(item);
+                newPhoneList.add(phoneNumber);
+                items.put(key, newPhoneList);
             }
         } else {
             items.put(key, new ArrayList<>(List.of(phoneNumber)));
@@ -47,10 +44,10 @@ public class PhoneBook {
 
         if (items.containsKey(key)) {
             var item = items.get(key);
-            var newPholeList = new ArrayList<String>();
-            newPholeList.addAll(item);
-            newPholeList.addAll(phoneNumbers);
-            items.put(key, newPholeList.stream().map(String::trim).distinct().toList());
+            var newPhoneList = new ArrayList<String>();
+            newPhoneList.addAll(item);
+            newPhoneList.addAll(phoneNumbers);
+            items.put(key, newPhoneList.stream().map(String::trim).distinct().toList());
         } else {
             items.put(key, phoneNumbers.stream().map(String::trim).distinct().toList());
         }
@@ -58,10 +55,11 @@ public class PhoneBook {
 
     public List<String> find(String name) {
         if (name == null || name.isBlank()) {
-            return null;
+            return Collections.emptyList();
         }
         var key = name.trim().toLowerCase();
-        return items.get(key);
+        return Optional.ofNullable(items.get(key))
+                .orElse(Collections.emptyList());
     }
 
     public boolean containsPhoneNumber(String phoneNumber) {
