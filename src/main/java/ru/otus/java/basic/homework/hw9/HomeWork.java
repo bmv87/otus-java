@@ -68,6 +68,8 @@ public class HomeWork {
         System.out.println(list);
         System.out.println("Результат:");
         System.out.println(getEmployeesNames(list));
+        System.out.println("getEmployeesNamesStreamApi:");
+        System.out.println(getEmployeesNamesStreamApi(list));
     }
 
     private static void doTask6() {
@@ -86,6 +88,8 @@ public class HomeWork {
         var minAge = 27;
         System.out.printf("Результат для возраста %d:%n", minAge);
         System.out.println(getEmployeesOlderMinAge(list, minAge));
+        System.out.println("getEmployeesOlderMinAgeStreamApi:");
+        System.out.println(getEmployeesOlderMinAgeStreamApi(list, minAge));
     }
 
     private static void doTask7() {
@@ -104,6 +108,8 @@ public class HomeWork {
         var minAge = 32;
         System.out.printf("Результат для возраста %d:%n", minAge);
         System.out.printf("Средний возраст не ниже %d: %b %n", minAge, isAverageAgeMoreOrEqualsMinValue(list, minAge));
+        System.out.println("isAverageAgeMoreOrEqualsMinValueStreamApi:");
+        System.out.printf("Средний возраст не ниже %d: %b %n", minAge, isAverageAgeMoreOrEqualsMinValueStreamApi(list, minAge));
     }
 
     private static void doTask8() {
@@ -121,6 +127,8 @@ public class HomeWork {
         System.out.println(list);
         System.out.println("Самый молодой сотрудник: ");
         System.out.println(getMostYoungerEmployee(list));
+        System.out.println("getMostYoungerEmployeeStreamApi:");
+        System.out.println(getMostYoungerEmployeeStreamApi(list));
     }
 
 
@@ -134,9 +142,13 @@ public class HomeWork {
         return list;
     }
 
-    private static int getSumOfFilteredItems(List<Integer> list, int min) {
+    private static <T> void nullValidation(List<T> list) {
         if (list == null)
             throw new IllegalArgumentException("Список не может быть пустым!");
+    }
+
+    private static int getSumOfFilteredItems(List<Integer> list, int min) {
+        nullValidation(list);
         int sum = 0;
         for (Integer i : list) {
             if (i != null && i > min)
@@ -146,8 +158,7 @@ public class HomeWork {
     }
 
     private static List<Integer> setAllItems(List<Integer> list, int newValue) {
-        if (list == null)
-            throw new IllegalArgumentException("Список не может быть пустым!");
+        nullValidation(list);
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) != null)
                 list.set(i, newValue);
@@ -156,8 +167,7 @@ public class HomeWork {
     }
 
     private static List<Integer> increaseAllItems(List<Integer> list, int delta) {
-        if (list == null)
-            throw new IllegalArgumentException("Список не может быть пустым!");
+        nullValidation(list);
         for (int i = 0; i < list.size(); i++) {
             var currentValue = list.get(i);
             if (currentValue != null)
@@ -167,72 +177,92 @@ public class HomeWork {
     }
 
     private static List<String> getEmployeesNames(List<Employee> list) {
-        if (list == null)
-            throw new IllegalArgumentException("Список не может быть пустым!");
+        nullValidation(list);
 
-        return list.stream().filter(Objects::nonNull).map(Employee::getName).collect(Collectors.toList());
-//        var namesList = new ArrayList<String>();
-//        for (Employee employee : list) {
-//            if (employee != null)
-//                namesList.add(employee.getName());
-//        }
-//        return namesList;
+        var namesList = new ArrayList<String>();
+        for (Employee employee : list) {
+            if (employee != null)
+                namesList.add(employee.getName());
+        }
+        return namesList;
+    }
+
+    private static List<String> getEmployeesNamesStreamApi(List<Employee> list) {
+        nullValidation(list);
+
+        return list.stream().filter(Objects::nonNull).map(Employee::getName).toList();
     }
 
     private static List<Employee> getEmployeesOlderMinAge(List<Employee> list, int minAge) {
-        if (list == null)
-            throw new IllegalArgumentException("Список не может быть пустым!");
+        nullValidation(list);
+        var newList = new ArrayList<Employee>();
+        for (Employee employee : list) {
+            if (employee != null && employee.getAge() >= minAge)
+                newList.add(employee);
+        }
+        return newList;
+    }
 
-        return list.stream().filter(e -> e != null && e.getAge() >= minAge).collect(Collectors.toList());
-//        var newList = new ArrayList<Employee>();
-//        for (Employee employee : list) {
-//            if (employee != null && employee.getAge() >= minAge)
-//                newList.add(employee);
-//        }
-//        return newList;
+    private static List<Employee> getEmployeesOlderMinAgeStreamApi(List<Employee> list, int minAge) {
+        nullValidation(list);
+        return list.stream().filter(e -> e != null && e.getAge() >= minAge).toList();
+    }
+
+
+    private static void checkInputParams(List<Employee> list, int minAverageAge) {
+        nullValidation(list);
+        if (minAverageAge <= 0)
+            throw new IllegalArgumentException("Возраст не указан!");
     }
 
     private static boolean isAverageAgeMoreOrEqualsMinValue(List<Employee> list, int minAverageAge) {
-        if (list == null)
-            throw new IllegalArgumentException("Список не может быть пустым!");
-        if (minAverageAge <= 0)
-            throw new IllegalArgumentException("Возраст не указан!");
+        checkInputParams(list, minAverageAge);
+
+        var sum = 0;
+        var count = 0;
+        for (Employee employee : list) {
+            if (employee == null) {
+
+                continue;
+            }
+            sum += employee.getAge();
+            ++count;
+        }
+        var averageAge = count > 0 ? sum / count : 0;
+        System.out.printf("Средний возраст: %d %n", averageAge);
+
+        return averageAge >= minAverageAge;
+    }
+
+    private static boolean isAverageAgeMoreOrEqualsMinValueStreamApi(List<Employee> list, int minAverageAge) {
+        checkInputParams(list, minAverageAge);
         var onlyEmplList = list.stream().filter(Objects::nonNull).toList();
         var averageAge = onlyEmplList.isEmpty()
                 ? 0
                 : onlyEmplList.stream().mapToInt(Employee::getAge).sum() / onlyEmplList.size();
         System.out.printf("Средний возраст: %d %n", averageAge);
         return averageAge >= minAverageAge;
-//        var sum = 0;
-//        var count = 0;
-//        for (Employee employee : list) {
-//            if (employee == null) {
-//
-//                continue;
-//            }
-//            sum += employee.getAge();
-//            ++count;
-//        }
-//        var averageAge = count > 0 ? sum / count : 0;
-//        System.out.printf("Средний возраст: %d %n",averageAge);
-
-//        return averageAge >= minAverageAge;
     }
 
     private static Employee getMostYoungerEmployee(List<Employee> list) {
-        if (list == null)
-            throw new IllegalArgumentException("Список не может быть пустым!");
+        nullValidation(list);
 
-        var oEmpl = list.stream().filter(Objects::nonNull).min(Comparator.comparing(Employee::getAge));
-        return oEmpl.orElse(null);
-//        list.sort(Comparator.nullsLast(Comparator.comparing(Employee::getAge)));
-//
-//        for (Employee employee : list) {
-//            if (employee == null)
-//                continue;
-//            return employee;
-//        }
-//        return null;
+        list.sort(Comparator.nullsLast(Comparator.comparing(Employee::getAge)));
+
+        for (Employee employee : list) {
+            if (employee == null)
+                continue;
+            return employee;
+        }
+        return null;
     }
 
+    private static Employee getMostYoungerEmployeeStreamApi(List<Employee> list) {
+        nullValidation(list);
+
+        return list.stream()
+                .filter(Objects::nonNull)
+                .min(Comparator.comparing(Employee::getAge))
+                .orElse(null);
+    }
 }
