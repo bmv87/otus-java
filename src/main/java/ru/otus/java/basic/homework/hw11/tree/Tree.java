@@ -7,12 +7,7 @@ public class Tree<T extends Comparable<T>> implements SearchTree<T> {
     private final Node<T> root;
 
     public Tree(List<T> list) {
-        list.sort(new Comparator<T>() {
-            @Override
-            public int compare(T o1, T o2) {
-                return o1.compareTo(o2);
-            }
-        });
+        list.sort(Comparable::compareTo);
         this.root = createTree(list, 0, list.size() - 1);
     }
 
@@ -117,7 +112,6 @@ public class Tree<T extends Comparable<T>> implements SearchTree<T> {
                 paddingBuilder.append("│  ");
 
                 String paddingForBoth = paddingBuilder.toString();
-                String pointerForRight = "└──";
                 String pointerForLeft = (node.getRightChild() != null) ? "├──" : "└──";
                 traversePreOrder(sb, node.getLeftChild(), paddingForBoth, pointerForLeft);
                 traversePreOrder(sb, node.getRightChild(), paddingForBoth, pointerForLeft);
