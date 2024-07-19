@@ -35,15 +35,9 @@ public class Main {
             System.out.println(box1);
             System.out.println(box2);
             System.out.println(box3);
-            if (box1.compare(box2)) {
-                System.out.printf("Коробки с номерами %d и %d равны%n", box1.getNumber(), box2.getNumber());
-            }
-            if (box1.compare(box3)) {
-                System.out.printf("Коробки с номерами %d и %d равны%n", box1.getNumber(), box3.getNumber());
-            }
-            if (box2.compare(box3)) {
-                System.out.printf("Коробки с номерами %d и %d равны%n", box2.getNumber(), box3.getNumber());
-            }
+            compareBoxes(box1, box2);
+            compareBoxes(box1, box3);
+            compareBoxes(box2, box3);
             box1.putAllByType(box2);
             System.out.println(box1);
             System.out.println(box2);
@@ -60,6 +54,13 @@ public class Main {
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
+    }
 
+    private static <T extends Fruit, E extends Fruit> void compareBoxes(Box<T> box1, Box<E> box2) {
+        if (box1.compare(box2)) {
+            System.out.printf("Коробки с номерами %d и %d имеют одинаковый вес %,.2f %n", box1.getNumber(), box2.getNumber(), box1.weight());
+        } else {
+            System.out.printf("Коробки с номерами %d и %d имеют разный вес %,.2f и %,.2f соответственно %n", box1.getNumber(), box2.getNumber(), box1.weight(), box2.weight());
+        }
     }
 }

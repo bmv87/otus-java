@@ -67,7 +67,7 @@ public class Box<T extends Fruit> {
     }
 
     public <E extends Fruit> boolean compare(Box<E> box) {
-        return weight() == box.weight();
+        return Double.compare(weight(), box.weight()) == 0;
     }
 
     @Override
