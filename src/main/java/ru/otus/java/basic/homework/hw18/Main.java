@@ -20,6 +20,7 @@ public class Main {
         Box<Fruit> box1 = new Box<>(Fruit.class, 1);
         Box<Apple> box2 = new Box<>(Apple.class, 2);
         Box<Orange> box3 = new Box<>(Orange.class, 3);
+        Box<Orange> box4 = new Box<>(Orange.class, 4);
 
         for (Fruit fruit : fruits) {
             box1.put(fruit);
@@ -38,6 +39,13 @@ public class Main {
             compareBoxes(box1, box2);
             compareBoxes(box1, box3);
             compareBoxes(box2, box3);
+
+//            box1.moveTo(box2);
+//            box1.moveTo(box3);
+//            box2.moveTo(box3);
+            box2.moveTo(box1);
+            box3.moveTo(box4);
+            box4.moveTo(box1);
             box1.putAllByType(box2);
             System.out.println(box1);
             System.out.println(box2);

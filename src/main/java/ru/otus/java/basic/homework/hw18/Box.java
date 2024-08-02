@@ -36,6 +36,11 @@ public class Box<T extends Fruit> {
         System.out.printf("В коробку №%d добавлен фрукт %s. %n", number, fruit.getType().getDescription());
     }
 
+    /**
+     *  Move to current box filtered content from source box
+     * @param box source box
+     * @param <E> box content type
+     */
     public <E extends Fruit> void putAllByType(Box<E> box) {
         var fr = box.getFruits()
                 .stream()
@@ -61,6 +66,16 @@ public class Box<T extends Fruit> {
         }
     }
 
+    public void addFruitsList(List<? extends T> fruits) {
+        this.fruits.addAll(fruits);
+        fruits.sort(Fruit::compareTo);
+        System.out.printf("Содержимое коробки №%d изменилось. %n", number);
+    }
+
+    public void moveTo(Box<? super T> box) {
+        box.addFruitsList(getFruits());
+        fruits.clear();
+    }
 
     public double weight() {
         return fruits.stream().mapToDouble(Fruit::getWeight).sum();
