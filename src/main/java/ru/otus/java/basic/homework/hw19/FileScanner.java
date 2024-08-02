@@ -1,7 +1,6 @@
 package ru.otus.java.basic.homework.hw19;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -14,13 +13,13 @@ public class FileScanner implements Closeable {
 
 
     public FileScanner(String dirPath) {
-        if (dirPath == null)
+        if (dirPath == null) {
             throw new IllegalArgumentException("Директория не задана.");
+        }
         directory = new File(dirPath);
-        if (!directory.exists())
-            throw new IllegalArgumentException("Директория не существует. " + directory.getPath());
-        if (!directory.isDirectory())
-            throw new IllegalArgumentException("Неправильный путь к директории.");
+        if (!directory.exists() || !directory.isDirectory()) {
+            throw new IllegalArgumentException("Директория не существует или неправильный путь к директории. " + directory.getPath());
+        }
         sc = new Scanner(System.in);
     }
 
@@ -57,11 +56,10 @@ public class FileScanner implements Closeable {
     }
 
     private void printFileContent() {
-        try (InputStreamReader bis = new InputStreamReader(new FileInputStream(currentFile), StandardCharsets.UTF_8)) {
-            int i;
-
-            while ((i = bis.read()) != -1) {
-                System.out.print((char) i);
+        try (BufferedReader br = new BufferedReader(new FileReader(currentFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,17 +73,13 @@ public class FileScanner implements Closeable {
         }
         int count = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(currentFile))) {
-            do {
-                // считаем сначала первую строку
-                String line = br.readLine();
-                if (line == null) {
-                    break;
-                }
+            String line;
+            while ((line = br.readLine()) != null) {
                 Matcher m = Pattern.compile("(?=(" + substring + "))").matcher(line);
                 while (m.find()) {
                     count += 1;
                 }
-            } while (true);
+            }
         }
         return count;
     }

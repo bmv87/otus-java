@@ -7,7 +7,6 @@ public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     private static final Scanner sc = new Scanner(System.in);
-    ;
 
     public static void main(String[] args) {
         try (FileScanner scanner = new FileScanner("files")) {
